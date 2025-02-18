@@ -1,14 +1,13 @@
 import { test, expect } from '@playwright/test';
+import { CheckboxPage } from '../pages/CheckboxPage';
 
 test('Verify checkboxes functionality', async ({ page }) => {
-  await page.goto('https://the-internet.herokuapp.com/checkboxes');
+  const checkboxPage = new CheckboxPage(page);
+  await checkboxPage.goto();
 
-  const checkbox1 = page.locator('input[type="checkbox"]').nth(0);
-  const checkbox2 = page.locator('input[type="checkbox"]').nth(1);
+  await expect(checkboxPage.checkbox1).not.toBeChecked();
+  await expect(checkboxPage.checkbox2).toBeChecked();
 
-  await expect(checkbox1).not.toBeChecked();
-  await expect(checkbox2).toBeChecked();
-
-  await checkbox1.check();
-  await expect(checkbox1).toBeChecked();
+  await checkboxPage.checkbox1.check();
+  await expect(checkboxPage.checkbox1).toBeChecked();
 });
