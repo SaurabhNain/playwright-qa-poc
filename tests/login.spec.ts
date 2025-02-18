@@ -1,8 +1,8 @@
-import { test, expect, Page } from '@playwright/test';
-import { LoginHelper } from './loginHelper.spec';
+import { test } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
 
 test('Verify login page elements', async ({ page }) => {
-    const loginHelper = new LoginHelper(page);
-    await loginHelper.goToLoginPage();
-    await loginHelper.verifyLoginPageElements();
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await loginPage.verifyElements();
 });
